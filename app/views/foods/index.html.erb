@@ -1,14 +1,40 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Foods</h1>
+<div class="container">
+  <div id="foods">
+    <%= link_to "New food", new_food_path, class: "float-right btn btn-primary" %> 
+    <br>
+    <div id="food-header" class="mt-4">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Food</th>
+            <th>Measurements</th>
+            <th>Unit Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
 
-<div id="foods">
-  <% @foods.each do |food| %>
-    <%= render food %>
-    <p>
-      <%= link_to "Show this food", food %>
-    </p>
-  <% end %>
+    <% @foods.each do |food| %>
+      <div class="food-container mt-4">
+        <%= link_to food_path(food) do %>
+          <div id="<%= dom_id food %>">
+            <table class="table">
+              <tbody>
+                <tr class="food-details">
+                  <td><%= food.name %></td>
+                  <td><%= food.measurements %></td>
+                  <td><%= food.price %></td>
+                  <td>
+                  <%= button_to "Destroy this food", @food, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New food", new_food_path %>

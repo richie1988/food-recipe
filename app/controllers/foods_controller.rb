@@ -1,5 +1,6 @@
 class FoodsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_food, only: %i[show edit update destroy]
 
   # GET /foods or /foods.json
   def index
@@ -18,8 +19,10 @@ class FoodsController < ApplicationController
   def edit; end
 
   # POST /foods or /foods.json
+  # POST /foods or /foods.json
   def create
     @food = Food.new(food_params)
+    @food.user = current_user # Assuming you are using Devise or another authentication system
 
     respond_to do |format|
       if @food.save
