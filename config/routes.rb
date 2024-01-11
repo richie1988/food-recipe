@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root "foods#index"
   resources :users
   resources :foods
-  get 'general_shopping_list' => 'foods#shopping_list', as: 'shopping_list'
+  get 'general_shopping_list', to: 'general_shopping_list#index'
 
 
   resources :recipes
