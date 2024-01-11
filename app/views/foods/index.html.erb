@@ -18,22 +18,20 @@
 
     <% @foods.each do |food| %>
       <div class="food-container mt-4">
-        <%= link_to food_path(food) do %>
-          <div id="<%= dom_id food %>">
-            <table class="table">
-              <tbody>
-                <tr class="food-details">
-                  <td><%= food.name %></td>
-                  <td><%= food.measurements %></td>
-                  <td><%= food.price %></td>
-                  <td>
-                  <%= button_to "Destroy this food", @food, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        <% end %>
+        <div id="<%= dom_id food %>">
+          <table class="table">
+            <tbody>
+              <tr class="food-details">
+                <td><%= food.name %></td>
+                <td><%= food.measurements %></td>
+                <td><%= food.price %></td>
+                <td>
+                  <%= button_to "Destroy this food", food, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     <% end %>
   </div>

@@ -18,11 +18,9 @@ class FoodsController < ApplicationController
   # GET /foods/1/edit
   def edit; end
 
-  # POST /foods or /foods.json
-  # POST /foods or /foods.json
-  def create
-    @food = Food.new(food_params)
-    @food.user = current_user # Assuming you are using Devise or another authentication system
+   # POST /foods or /foods.json
+   def create
+    @food = current_user.foods.build(food_params)
 
     respond_to do |format|
       if @food.save
