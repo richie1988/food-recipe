@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   # for updating the public 
   patch 'recipes/:id/toggle_public', to: 'recipes#toggle_public', as: 'toggle_public_recipe'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get 'recipe_foods' => 'recipe_foods#index', as:'recipe_foods'
+  get 'recipe_foods/delete/:id' => 'recipe_foods#destroy', as: 'delete_recipe_food'
+  post 'recipe_foods/create' => 'recipe_foods#create', as:'create_recipe_food'
 
   # Defines the root path route ("/")
   # root "articles#index"
