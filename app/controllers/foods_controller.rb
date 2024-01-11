@@ -18,8 +18,8 @@ class FoodsController < ApplicationController
   # GET /foods/1/edit
   def edit; end
 
-   # POST /foods or /foods.json
-   def create
+  # POST /foods or /foods.json
+  def create
     @food = current_user.foods.build(food_params)
 
     respond_to do |format|
