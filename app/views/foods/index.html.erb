@@ -1,38 +1,30 @@
-<h1>Foods</h1>
-<div class="container">
-  <div id="foods">
-    <%= link_to "New food", new_food_path, class: "float-right btn btn-primary" %> 
-    <br>
-    <div id="food-header" class="mt-4">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Food</th>
-            <th>Measurements</th>
-            <th>Unit Price</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
+<div class="food-list">
+  <%= link_to "New food", new_food_path, class: "float-right btn btn-primary" %>
 
-    <% @foods.each do |food| %>
-      <div class="food-container mt-4">
-        <div id="<%= dom_id food %>">
-          <table class="table">
-            <tbody>
-              <tr class="food-details">
-                <td><%= food.name %></td>
-                <td><%= food.measurements %></td>
-                <td><%= food.price %></td>
-                <td>
-                  <%= button_to "Destroy this food", food, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  <% if @foods.present? %>
+    <table id="food-list" class="table">
+      <thead>
+        <tr>
+          <th>Food</th>
+          <th>Measurements</th>
+          <th>Unit Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @foods.each do |food| %>
+          <tr>
+            <td><%= food.name %></td>
+            <td><%= food.measurements %></td>
+            <td><%= food.price %></td>
+            <td>
+              <%= button_to "Delete", food, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="text-center">No items in the Food list</p>
+  <% end %>
 </div>

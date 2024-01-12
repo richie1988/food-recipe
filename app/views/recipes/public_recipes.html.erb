@@ -10,15 +10,15 @@
   <% @ingredients.each do |item| %>
     <% @total_price += item.food.price * item.quantity %>
     <% end %>
-    <tbody class="border border-primary-subtle">
-    <tr>
-      <td><%= link_to recipe.name, recipe %></td>
+    <tbody class="border border-primary-subtle public-recipe">
+    <tr class="t2">
+      <td><h4><%= link_to recipe.name, recipe %></h4></td>
       <td><%= recipe.description %></span></td>
     </tr>
 
-    <tr>
-      <td><span> by <%= recipe.user.name %></span></td>
-      <td>The total price is $<%= @total_price %></td>
+    <tr class="t2">
+      <td>By: <strong><%= recipe.user.name %></strong></td>
+      <td><strong>The total price: $<%= @total_price %></strong></td>
     </tr>
 
     </tbody>
