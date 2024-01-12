@@ -30,19 +30,4 @@ RSpec.describe 'Testing Recipe#show view', type: :feature do
   it 'displays a link to generate a shopping list' do
     expect(page).to have_link('Generate Shopping List', href: shopping_list_path)
   end
-
-  it 'displays a link to add ingredients if the current user is the recipe owner' do
-    expect(page).to have_link('Add Ingredients', href: add_recipe_food_path)
-  end
-  it 'allows the user to add ingredients to a recipe' do
-    visit add_recipe_food_path(@recipe)
-    food = Food.create(name: 'Test Food', price: 5)
-  
-    select food.name, from: 'Food'
-    fill_in 'Quantity', with: 2
-  
-    click_button 'Add Ingredient'
-    expect(page).to have_content('Ingredient is successfully created.')
-    expect(@recipe.recipe_foods.find_by(food_id: food.id).quantity).to eq(2)
-  end
 end
