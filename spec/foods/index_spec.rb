@@ -7,8 +7,8 @@ RSpec.describe 'Testing Food#index view, it should', type: :feature do
   before(:each) do
     @user = User.create(name: 'Test User', email: 'example@test.com', password: '123456')
     sign_in @user
-    @food = Food.create(name: 'Test Food', measurement_unit: 'test', price: 10, user_id: @user.id)
-    5.times { |i| Food.create(name: "Food ##{i}", measurement_unit: 'unit', price: 1, user_id: @user.id) }
+    @food = Food.create(name: 'Test Food', measurements: 'test', price: 10, user_id: @user.id)
+    5.times { |i| Food.create(name: "Food ##{i}", measurements: 'unit', price: 1, user_id: @user.id) }
     visit user_foods_path(@user)
   end
 
@@ -18,7 +18,7 @@ RSpec.describe 'Testing Food#index view, it should', type: :feature do
   end
 
   it 'display the measurement unit of the food' do
-    expect(page).to have_content(@food.measurement_unit)
+    expect(page).to have_content(@food.measurements)
   end
 
   it 'display the price of the food' do
