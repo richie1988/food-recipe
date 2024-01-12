@@ -11,7 +11,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true, allow_blank: false
   validates :encrypted_password, presence: true, allow_blank: false
-  
+
   def general_shopping_list
     # Assuming you want to get the unique foods across all recipes
     food_ids = recipe_foods.joins(:food).pluck('foods.id')
