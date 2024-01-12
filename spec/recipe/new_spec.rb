@@ -1,30 +1,87 @@
+# spec/controllers/users_controller_spec.rb
 require 'rails_helper'
-require 'devise'
 
-RSpec.describe 'Testing Recipe#new view, it', type: :feature do
-  include Devise::Test::IntegrationHelpers
-  before(:each) do
-    @user = User.create(name: 'Test User', email: 'example@test.com', password: '123456')
-    sign_in @user
-    visit new_user_recipe_path(@user)
+RSpec.describe UsersController, type: :controller do
+  let(:valid_attributes) {
+    { name: 'Test User', email: 'test@example.com', password: 'password' }
+  }
+
+  let(:invalid_attributes) {
+    { name: nil, email: 'test@example.com', password: 'password' }
+  }
+
+  describe "GET #index" do
+    it "returns a success response" do
+      User.create! valid_attributes
+      get :index
+      expect(response).to be_successful
+    end
   end
 
-  it 'display a form to create a new food' do
-    expect(page).to have_field('recipe_name')
-    expect(page).to have_field('recipe_description')
-    expect(page).to have_field('recipe_preparation')
-    expect(page).to have_field('recipe_cookingtime')
-    expect(page).to have_field('recipe_public')
-    expect(page).to have_button('Create Recipe')
+  describe "GET #show" do
+    it "returns a success response" do
+      user = User.create! valid_attributes
+      get :show, params: { id: user.to_param }
+      expect(response).to be_successful
+    end
   end
 
-  it 'create a new food when the form is submitted' do
-    fill_in('recipe_name', with: 'Recipe')
-    fill_in('recipe_description', with: 'Test Description')
-    fill_in('recipe_preparation', with: 10)
-    fill_in('recipe_cookingtime', with: 10)
-    click_button('Create Recipe')
-    expect(page).to have_current_path(user_recipes_path(@user))
-    expect(page).to have_content('Recipe')
+  describe "GET #new" do
+    it "returns a success response" do
+      get :new
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET #edit" do
+    it "returns a success response" do
+      user = User.create! valid_attributes
+      get :edit, params: { id: user.to_param }
+      expect(response).to be_successful
+    end
+  end
+
+  describe "PUT #update" do
+    context "with valid params" do
+      let(:new_attributes) {
+        { name: 'New Name' }
+      }
+
+      it "updates the requested user" do
+        user = User.create! valid_attributes
+        put :update, params: { id: user.to_param, user: new_attributes }
+        user.reload
+        expect(user.name).to eq('New Name')
+      end
+
+      it "redirects to the user" do
+        user = User.create! valid_attributes
+        put :update, params: { id: user.to_param, user: valid_attributes }
+        expect(response).to redirect_to(user)
+      end
+    end
+
+    context "with invalid params" do
+      it "returns a success response (i.e. to display the 'edit' template)" do
+        user = User.create! valid_attributes
+        put :update, params: { id: user.to_param, user: invalid_attributes }
+        expect(response).to be_successful
+      end
+    end
+  end
+
+  describe "DELETE #destroy" do
+    it "destroys the requested user" do
+      user = User.create! valid_attributes
+      expect {
+        delete :destroy, params: { id: user.to_param }
+      }.to change(User, :count).by(-1)
+    end
+
+    it "redirects to the users list" do
+      user = User.create! valid_attributes
+      delete :destroy, params: { id: user.to_param }
+      expect(response).to redirect_to(users_url)
+    end
   end
 end

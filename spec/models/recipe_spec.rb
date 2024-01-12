@@ -6,8 +6,8 @@ RSpec.describe Recipe, type: :model do
     @user = User.create(email: 'sadaf@example.com', password: 'password')
     @recipe = Recipe.new(
       name: 'Potato',
-      preparation_time: 10,
-      cooking_time: 20,
+      preparation: 10,
+      cookingtime: 20,
       description: 'Boil the potato',
       public: true,
       user: @user
@@ -25,22 +25,22 @@ RSpec.describe Recipe, type: :model do
     end
 
     it 'is not valid without a preparation time' do
-      @recipe.preparation_time = nil
+      @recipe.preparation = nil
       expect(@recipe).to_not be_valid
     end
 
     it 'is not valid with a non-positive preparation time' do
-      @recipe.preparation_time = -1
+      @recipe.preparation = -1
       expect(@recipe).to_not be_valid
     end
 
     it 'is not valid without a cooking time' do
-      @recipe.cooking_time = nil
+      @recipe.cooking = nil
       expect(@recipe).to_not be_valid
     end
 
     it 'is not valid with a non-positive cooking time' do
-      @recipe.cooking_time = -1
+      @recipe.cookingtime = -1
       expect(@recipe).to_not be_valid
     end
 

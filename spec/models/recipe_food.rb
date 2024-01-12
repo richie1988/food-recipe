@@ -7,8 +7,8 @@ RSpec.describe RecipeFood, type: :model do
     @user = User.create(email: 'sadaf@example.com', password: 'password')
     @recipe = Recipe.new(
       name: 'Potato',
-      preparation_time: 10,
-      cooking_time: 20,
+      preparation: 10,
+      cookingtime: 20,
       description: 'Boil the potato',
       public: true,
       user: @user
