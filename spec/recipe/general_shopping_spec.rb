@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'devise'
 
 RSpec.describe 'Testing Recipe#show view, it', type: :feature do
-include Devise::Test::IntegrationHelpers
+  include Devise::Test::IntegrationHelpers
   before(:each) do
     @user = User.create(name: 'Test User', email: 'example@test.com', password: '123456')
     @user2 = User.create(name: 'User Test', email: 'test@example.com', password: '234567')
