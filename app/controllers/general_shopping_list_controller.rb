@@ -3,7 +3,7 @@ class GeneralShoppingListController < ApplicationController
 
   def index
     @user = current_user
-    @shopping_list_foods = @user.general_shopping_list
+    @shopping_list_foods = @user.general_shopping_list.includes(:food)
   end
 
   private
