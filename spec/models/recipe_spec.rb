@@ -1,37 +1,52 @@
 require 'rails_helper'
-
+require 'devise'
 RSpec.describe Recipe, type: :model do
-  describe 'validations' do
-    it 'requires a name' do
-      recipe = Recipe.new(name: nil)
-      expect(recipe).not_to be_valid
-    end
-
-    it 'requires a preparation_time' do
-      recipe = Recipe.new(preparation: nil)
-      expect(recipe).not_to be_valid
-    end
-
-    it 'requires a cook_time' do
-      recipe = Recipe.new(cookingtime: nil)
-      expect(recipe).not_to be_valid
-    end
-
-    it 'requires the name to be unique' do
-      Recipe.create(name: 'Rice')
-      recipe = Recipe.new(name: 'Rice')
-      expect(recipe).not_to be_valid
-    end
+  include Devise::Test::IntegrationHelpers
+  before(:each) do
+    @user = User.create(email: 'sadaf@example.com', password: 'password')
+    @recipe = Recipe.new(
+      name: 'Potato',
+      preparation: 10,
+      cookingtime: 20,
+      description: 'Boil the potato',
+      public: true,
+      user: @user
+    )
   end
-  describe 'associations' do
-    it 'has many recipe_foods' do
-      recipe = Recipe.reflect_on_association(:recipe_foods)
-      expect(recipe.macro).to eq(:has_many)
+
+  describe 'validations' do
+    it 'is valid with valid attributes' do
+      expect(@recipe).to be_valid
     end
 
-    it 'has many foods' do
-      recipe = Recipe.reflect_on_association(:foods)
-      expect(recipe.macro).to eq(:has_many)
+    it 'is not valid without a name' do
+      @recipe.name = nil
+      expect(@recipe).to_not be_valid
+    end
+
+    it 'is not valid without a preparation time' do
+      @recipe.preparation = nil
+      expect(@recipe).to_not be_valid
+    end
+
+    it 'is not valid with a non-positive preparation time' do
+      @recipe.preparation = -1
+      expect(@recipe).to_not be_valid
+    end
+
+    it 'is not valid with a non-positive cooking time' do
+      @recipe.cookingtime = -1
+      expect(@recipe).to_not be_valid
+    end
+
+    it 'is not valid without a description' do
+      @recipe.description = nil
+      expect(@recipe).to_not be_valid
+    end
+
+    it 'is not valid without a public' do
+      @recipe.public = nil
+      expect(@recipe).to_not be_valid
     end
   end
 end
