@@ -1,5 +1,5 @@
 <h1 align="center">Food Recipe App</h1>
-<!-- <img src="app/assets/images/database.png" alt="database" width="100%" height="auto"> -->
+<img src="app/assets/images/database.png" alt="database" width="100%" height="auto">
 
 ## 📗 Table of Contents
 
