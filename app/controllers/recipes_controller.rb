@@ -2,18 +2,18 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, except: %i[show public_recipes]
 
   def index
-    @recipes = current_user.recipes
+    @recipes = current_user.recipes.includes(:recipe_foods)
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.includes(recipe_foods: :food).find(params[:id])
     @recipe_foods = @recipe.recipe_foods
     @food = Food.all
   end
 
   def public_recipes
-    @recipes = Recipe.where(public: true).order(created_at: :desc)
-    @recipe_foods = RecipeFood.includes([:food]).all
+    @recipes = Recipe.includes(recipe_foods: :food).where(public: true).order(created_at: :desc)
+    @recipe_foods = RecipeFood.includes(:food).all
   end
 
   def new

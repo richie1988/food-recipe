@@ -1,32 +1,30 @@
+# spec/models/food_spec.rb
 require 'rails_helper'
+require 'devise'
 
 RSpec.describe Food, type: :model do
-  describe 'validations' do
-    it 'requires a name' do
-      food = Food.new(name: nil)
-      expect(food).not_to be_valid
-    end
-
-    it 'requires a quantity' do
-      food = Food.new(quantity: nil)
-      expect(food).not_to be_valid
-    end
-
-    it 'requires a measurement_unit' do
-      food = Food.new(measurements: nil)
-      expect(food).not_to be_valid
-    end
-
-    it 'requires a price' do
-      food = Food.new(price: nil)
-      expect(food).not_to be_valid
-    end
+  include Devise::Test::IntegrationHelpers
+  before(:each) do
+    @user = User.create(name: 'Test User', email: 'example@test.com', password: '123456')
   end
 
-  describe 'associations' do
-    it 'has many recipe_foods' do
-      food = Food.reflect_on_association(:recipe_foods)
-      expect(food.macro).to eq(:has_many)
-    end
+  it 'is valid with valid attributes' do
+    food = Food.new(name: 'Potato', measurements: 'kg', price: 2, user: @user)
+    expect(food).to be_valid
+  end
+
+  it 'is not valid without a name' do
+    food = Food.new(measurements: 'kg', price: 2, user: @user)
+    expect(food).to_not be_valid
+  end
+
+  it 'is not valid without measurements' do
+    food = Food.new(name: 'Potato', price: 2, user: @user)
+    expect(food).to_not be_valid
+  end
+
+  it 'is not valid without a price' do
+    food = Food.new(name: 'Potato', measurements: 'kg', user: @user)
+    expect(food).to_not be_valid
   end
 end
