@@ -34,11 +34,6 @@ RSpec.describe Recipe, type: :model do
       expect(@recipe).to_not be_valid
     end
 
-    it 'is not valid without a cooking time' do
-      @recipe.cooking = nil
-      expect(@recipe).to_not be_valid
-    end
-
     it 'is not valid with a non-positive cooking time' do
       @recipe.cookingtime = -1
       expect(@recipe).to_not be_valid

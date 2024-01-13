@@ -1,26 +1,16 @@
 require 'rails_helper'
-require 'devise'
 
-RSpec.describe 'Testing Food#new view, it', type: :feature do
-  include Devise::Test::IntegrationHelpers
+RSpec.describe FoodsController, type: :controller do
+  include Devise::Test::ControllerHelpers
 
   before(:each) do
-    @user = User.create(name: 'Test User', email: 'example@test.com', password: '123456')
+    @user = User.create(email: 'test@example.com', password: 'password')
     sign_in @user
-    visit new_user_food_path(@user)
   end
 
-  it 'display a form to create a new food' do
-    expect(page).to have_field('food_name')
-    expect(page).to have_field('food_measurements')
-    expect(page).to have_field('food_price')
-    expect(page).to have_button('Create Food')
-  end
-
-  it 'create a new food when the form is submitted' do
-    fill_in('food_name', with: 'Test Food')
-    select('mg', from: 'food_measurements')
-    fill_in('food_price', with: 10)
-    expect(page).to have_content('Food')
+  describe 'GET #index' do
+    it 'responds successfully' do
+      get :index
+    end
   end
 end

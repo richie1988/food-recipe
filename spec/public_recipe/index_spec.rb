@@ -7,8 +7,8 @@ RSpec.describe 'Testing PublicRecipe#index view, it', type: :feature do
     @user = User.create(name: 'Test User', email: 'example@test.com', password: '123456')
     sign_in @user
     @recipe = Recipe.create(name: 'Public Recipe', description: 'Test Description',
-                              preparation: 10, cookingtime: 10,
-                              public: true, user_id: @user.id)
+                            preparation: 10, cookingtime: 10,
+                            public: true, user_id: @user.id)
     4.times do |i|
       Recipe.create(name: "Recipe ##{i}", description: "Description ##{i}",
                     preparation: 10, cookingtime: 10,

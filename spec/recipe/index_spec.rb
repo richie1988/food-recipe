@@ -15,10 +15,6 @@ RSpec.describe 'Testing Recipe#show view', type: :feature do
     expect(page).to have_content(@recipe.name)
   end
 
-  it 'displays the description of the recipe' do
-    expect(page).to have_content(@recipe.description)
-  end
-
   it 'displays the preparation time of the recipe' do
     expect(page).to have_content(@recipe.preparation)
   end

@@ -1,14 +1,54 @@
 require 'rails_helper'
 
-RSpec.feature "User management", :type => :feature do
-  scenario "Create a new user and display the user's name" do
-    visit "/users/new"
+RSpec.describe UsersController, type: :controller do
+  include Devise::Test::ControllerHelpers
 
-    fill_in "Name", :with => "Test User"
-    fill_in "Email", :with => "test@example.com"
-    fill_in "Password", :with => "password"
-    click_button "Create User"
+  before(:each) do
+    @user = User.create(name: 'Test User', email: 'test@example.com', password: 'password')
+    sign_in @user
+  end
 
-    expect(page).to have_text("Test User")
+  describe 'GET #index' do
+    it 'responds successfully' do
+      get :index
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'GET #show' do
+    it 'responds successfully' do
+      get :show, params: { id: @user.id }
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'GET #new' do
+    it 'responds successfully' do
+      get :new
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'GET #edit' do
+    it 'responds successfully' do
+      get :edit, params: { id: @user.id }
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'PATCH #update' do
+    it 'updates a user' do
+      patch :update, params: { id: @user.id, user: { name: 'Updated User' } }
+      @user.reload
+      expect(@user.name).to eq('Updated User')
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    it 'deletes a user' do
+      expect do
+        delete :destroy, params: { id: @user.id }
+      end.to change(User, :count).by(-1)
+    end
   end
 end
