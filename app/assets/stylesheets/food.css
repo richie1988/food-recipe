@@ -1,3 +1,44 @@
+.heading {
+  text-align: center;
+  margin: 40px 0;
+}
+
 .float-right {
   float: right; /* Adjust the value as needed */
+}
+
+.shopping-ptag {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  margin: 40px 0;
+}
+
+.shopping-ptag p {
+  margin: 0 20px;
+}
+
+.public-recipe {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  margin: 40px 0;
+}
+
+.t2 td {
+  padding: 10px 40px;
+  text-decoration: none;
+}
+
+td a {
+  text-decoration: none;
+}
+
+#food-list,
+#shopping-list {
+  width: 60%;
+  margin: auto;
+  border: 1px solid #ccc;
 }
