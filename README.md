@@ -110,9 +110,9 @@ Open your web browser and go to http://localhost:3000 to access the Blog App.
 
 👤 **Mahdi Noori**
 
-- 👤 GitHub: [@Richard Sikaonga](https://github.com/richie1988)
-- 👤 Twitter: [@Richard Sikaonga](https://twitter.com/RichardSikao)
-- 👤 LinkedIn: [@Richad Sikaonga](https://www.linkedin.com/in/richard-sikaonga-039940275/)
+- 👤 GitHub: [@Mahdi Noori](https://github.com/mahdinoori2000)
+- 👤 Twitter: [@Mahdi Noori](https://twitter.com/@mahdinoori2000)
+- 👤 LinkedIn: [@Mahdi Noori](https://linkedin.com/in/mahdi-noori-hc201)
 
 
 ## 🤝 Contributing <a name="contributing"></a>
